@@ -2,9 +2,36 @@
   text-align: center;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.article{
+  display: block;
+  border: thick double rgba(89, 89, 89, 0.5);
+  padding: 5px;
+}
+
+.modifiedBox{
+  display: none;
+}
+
+.modifiedBox.open {
+  display: flexbox;
+}
+
+.sideBar{
+  height: 100%;
+  width: 20%;
+  border-color: black;
+}
+
+.profilePhoto{
+  border-radius: 9999px;
+  width: 100px;
+  height: 100px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
