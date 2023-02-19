@@ -22,18 +22,46 @@ app.add_middleware(
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0")
 
+# CORS 오류 방지 코드 ----
+
+dir_path = "../Database/"
+
 
 class Blog(BaseModel):
-    id: int
+    title: str
     content: str
+
+
+@app.get("/")
+def show_blog():
+    file_list = os.listdir(dir_path)
+    file_list_txt = [file for file in file_list if file.endswith(".txt")]
+
+    text_list = []
+
+    for file in file_list_txt:
+        f = open(f"../Database/{file}", "r")
+        file_text = f.read()
+        text_list.append(file_text)
+
+    return {"content": text_list}
 
 
 @app.post("/addblog/")
 async def add_blog(blog: Blog):
 
-    f = open(f"..\Database\{blog.id}.txt", 'w')
+    f = open(f"..\Database\{blog.title}.txt", 'w')
     f.write(blog.content)
 
     f.close()
 
     return {"msg": "Ay-yo"}
+
+
+@app.post("/delectblog/")
+async def delect_blog(blog: Blog):
+
+    file_path = f'../Database/{blog.title}.txt'
+    os.remove(file_path)
+
+    return {"msg": "삭제 성공"}

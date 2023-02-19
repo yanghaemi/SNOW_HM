@@ -16,7 +16,7 @@ function App() {
 
   const testApi = async () => {
     const requestOptions = {
-      id: 3,
+      title: text,
       content: text,
     };
 
