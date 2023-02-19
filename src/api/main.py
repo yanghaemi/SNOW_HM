@@ -32,7 +32,7 @@ class Blog(BaseModel):
     content: str
 
 
-@app.get("/")
+@app.get("/showblog")
 def show_blog():
     file_list = os.listdir(dir_path)
     file_list_txt = [file for file in file_list if file.endswith(".txt")]

@@ -11,7 +11,7 @@ function App() {
   };
 
   const [text, setText] = useState("");
-  const [post, setPost] = useState(["H2O", "커피"]);
+  const [post, setPost] = useState([]);
 
   const testApi = async () => {
     const requestOptions = {
@@ -32,21 +32,26 @@ function App() {
     }
   };
 
-  // const reload = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:8000/");
-  //     console.log(response.data);
-  //     return response.data;
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
+  const reload = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/showblog");
+      console.log(response);
+      setPost(response.data.content);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    reload();
+  }, post);
 
   const handlePost = () => {
     if (text !== "") {
-      setPost((prevList) => [...prevList, text]);
+      // setPost((prevList) => [...prevList, text]);
       setText("");
       testApi(text);
+      reload();
     }
   };
 
