@@ -1,7 +1,6 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import uuid from "react-uuid";
 
 function App() {
   const userInfo = {
@@ -33,10 +32,22 @@ function App() {
     }
   };
 
+  // const reload = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:8000/");
+  //     console.log(response.data);
+  //     return response.data;
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
   const handlePost = () => {
-    setPost((prevList) => [...prevList, text]);
-    setText("");
-    testApi(text);
+    if (text !== "") {
+      setPost((prevList) => [...prevList, text]);
+      setText("");
+      testApi(text);
+    }
   };
 
   return (
@@ -76,8 +87,28 @@ const Article = (props) => {
     console.log(props.post);
   }, [props.post]);
 
+  const articleDel = async (r) => {
+    const requestOptions = {
+      title: r,
+      content: r,
+    };
+
+    console.log(r);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/delectblog",
+        requestOptions
+      );
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   let articles = props.post.map((article, i) => {
     let removed = () => {
+      articleDel(article);
       props.post.splice(i, 1);
       let tempPost = [...props.post];
       props.setPost(tempPost);
