@@ -1,5 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import uuid from "react-uuid";
 
 function App() {
   const userInfo = {
@@ -12,9 +14,29 @@ function App() {
   const [text, setText] = useState("");
   const [post, setPost] = useState(["H2O", "커피"]);
 
+  const testApi = async () => {
+    const requestOptions = {
+      id: 3,
+      content: text,
+    };
+
+    console.log(requestOptions);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/addblog/",
+        requestOptions
+      );
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const handlePost = () => {
     setPost((prevList) => [...prevList, text]);
     setText("");
+    testApi(text);
   };
 
   return (
