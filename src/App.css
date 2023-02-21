@@ -1,31 +1,76 @@
 .App {
   text-align: center;
+ 
 }
-
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
+header{
+  margin: 0px 15px;
+}
+
+
+
+main{
+  position: fixed;
+  margin: 0px auto;
+  display: block;
+  
+  justify-content:flex-start;
+  left: 365px;
+  right: 365px;
+  max-width: 700px;
+  width: 100%;
+}
+
 .article{
   display: block;
-  border: thick double rgba(89, 89, 89, 0.5);
+  width: 100%;
+  border: rgba(89, 89, 89, 0.5);
+  
   padding: 5px;
 }
 
-.modifiedBox{
-  display: none;
-}
-
-.modifiedBox.open {
-  display: flexbox;
+.article:hover{
+  background-color: #c8c8c87d;
+  transition: 0.3s;
 }
 
 .sideBar{
+  margin: 15px;
+  padding: 15px;
+  position: fixed;
+  right: auto;
   height: 100%;
-  width: 20%;
   border-color: black;
+}
+.bar{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  margin: 0px auto;
+  left: 365px;
+  right: 365px;
+  display:flex;
+  flex-direction: row;
+  max-width: 700px;
+  background-color: rgba(255, 255, 255, 0.766);
+}
+
+.bottomBarBtn{
+  
+  border-radius: 15px;
+  margin: 0px auto;
+  padding: 0px 15px;
+}
+
+.bottomBarBtn:hover{
+  background-color: rgba(181, 173, 233, 0.54);
+  transition: 0.3s;
 }
 
 .profilePhoto{
