@@ -26,6 +26,8 @@ if __name__ == "__main__":
 
 dir_path = "../Database/"
 
+searchText = ""
+
 
 class Blog(BaseModel):
     title: str
@@ -65,3 +67,28 @@ async def delect_blog(blog: Blog):
     os.remove(file_path)
 
     return {"msg": "삭제 성공"}
+
+
+@app.get("/search/{searchText}")
+def search_blog(searchText):
+    file_list = os.listdir(dir_path)
+    file_list_txt = [file for file in file_list if file.endswith(".txt")]
+
+    text_list = []
+
+    for file in file_list_txt:
+        f = open(f"../Database/{file}", "r")
+        file_text = f.read()
+        text_list.append(file_text)
+
+    print(searchText)
+
+    text_search_list = []
+
+    for file in text_list:
+        if searchText in file:
+            text_search_list.append(file)
+        else:
+            continue
+
+    return {"검색 키워드": searchText, "결과": text_search_list}

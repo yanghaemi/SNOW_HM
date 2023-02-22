@@ -1,11 +1,14 @@
 import "../App.css";
+import { Link } from "react-router-dom";
 
 const Bottombar = () => {
   return (
     <div className="bar">
-      <div className="bottomBarBtn">홈</div>
-      <div className="bottomBarBtn">검색</div>
-      <div className="bottomBarBtn">마이페이지</div>
+      <h3 className="bottomBarBtn">홈</h3>
+
+      <h3 className="bottomBarBtn">검색</h3>
+
+      <h3 className="bottomBarBtn">마이페이지</h3>
     </div>
   );
 };
