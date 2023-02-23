@@ -59,7 +59,7 @@ const TimeLine = () => {
         ></input>
         <button onClick={handlePost}>제출</button>
         <p>{post.length}개의 기록</p>
-        <Article post={post} setPost={setPost}></Article>
+        <Article post={post} setPost={setPost} reload={reload}></Article>
       </main>
     </>
   );
@@ -69,7 +69,7 @@ const Article = (props) => {
   let editInputText = "";
 
   useEffect(() => {
-    console.log(props.post);
+    props.reload();
   }, [props.post]);
 
   const articleDel = async (r) => {
@@ -92,17 +92,7 @@ const Article = (props) => {
   let articles = props.post.map((article, i) => {
     let removed = () => {
       articleDel(article);
-      props.post.splice(i, 1);
-      let tempPost = [...props.post];
-      props.setPost(tempPost);
-    };
-
-    let modified = () => {
-      props.setPost((pre) => {
-        let newPost = [...pre];
-        newPost[i] = editInputText;
-        return newPost;
-      });
+      props.reload();
     };
 
     return (
@@ -111,15 +101,6 @@ const Article = (props) => {
           <p>{article}</p>
 
           <button onClick={removed}>삭제</button>
-          <form>
-            <input
-              type="text"
-              onChange={(e) => {
-                editInputText = e.target.value;
-              }}
-            ></input>
-            <button onClick={modified}>수정</button>
-          </form>
         </div>
       </>
     );

@@ -8,33 +8,14 @@ const Search = () => {
 
   const searchApi = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/search", searchText);
-      console.log(res);
-      setSearchPost(res.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const reload = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:8000/search",
+      const res = await axios.get(
+        `http://127.0.0.1:8000/search/${searchText}`,
         searchText
       );
-      console.log(response);
-      setSearchPost(response.data);
+      console.log(res);
+      setSearchPost(res.data.searchRes);
     } catch (e) {
       console.log(e);
-    }
-  };
-
-  const handlePost = () => {
-    if (searchText !== "") {
-      // setPost((prevList) => [...prevList, text]);
-      setSearchText("");
-      searchApi(searchText);
-      reload();
     }
   };
 
@@ -49,9 +30,33 @@ const Search = () => {
         value={searchText}
         placeholder="search"
       ></input>
-      <button onClick={handlePost}></button>
+      <button
+        onClick={() => {
+          if (searchText !== "") {
+            searchApi(searchText);
+          }
+        }}
+      >
+        검색
+      </button>
+      <SearchList
+        setSearchPost={setSearchPost}
+        searchPost={searchPost}
+      ></SearchList>
     </main>
   );
+};
+
+const SearchList = (props) => {
+  let searchArticles = props.searchPost.map((searchArticle, i) => {
+    return (
+      <div className="article">
+        <p>{searchArticle}</p>
+      </div>
+    );
+  });
+
+  return <>{searchArticles}</>;
 };
 
 export default Search;

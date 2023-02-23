@@ -64,7 +64,7 @@ button{
 }
 
 .bottomBarBtn{
-  
+  text-decoration-line: none;
   border-radius: 15px;
   margin: 0px auto;
   padding: 0px 15px;

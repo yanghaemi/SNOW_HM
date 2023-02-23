@@ -91,4 +91,4 @@ def search_blog(searchText):
         else:
             continue
 
-    return {"검색 키워드": searchText, "결과": text_search_list}
+    return {"searchKeyword": searchText, "searchRes": text_search_list}
